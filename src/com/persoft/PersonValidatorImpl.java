@@ -10,7 +10,7 @@ public class PersonValidatorImpl implements PersonValidator {
                 .throwIfInvalid("Pleace specify valid firstName!");
 
         ValidatorUtil.notNullInteger
-                .and(ValidatorUtil.greaterThanZero)
+                .and(ValidatorUtil.integerMoreThan(18))
                 .test(person.getAge())
                 .throwIfInvalid("Pleace specify valit age. More than 18 years.");
 
