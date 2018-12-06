@@ -13,7 +13,7 @@ public class PersonValidatorImpl extends ValidatorUtil implements PersonValidato
                 .and(notEmpty())
                 .and(length(2,5))
                 .validate(person.getFirstName())
-                .throwIfInvalid("Pleace specify valid firstName!");
+                .throwIfInvalid("Please specify valid firstName!");
 
         notNull().and(lessThanOrEqual(28)).validate(person.getAge()).throwIfInvalid("Age is not valid");
 
