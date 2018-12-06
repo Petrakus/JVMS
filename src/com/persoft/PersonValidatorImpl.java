@@ -1,24 +1,22 @@
 package com.persoft;
 
+import com.persoft.utils.ValidatorUtil;
+
 public class PersonValidatorImpl implements PersonValidator {
     @Override
     public void validate(Person person) {
 
-        ValidatorUtil.notNullString
-                .and(ValidatorUtil.notEmptyString)
-                .test(person.getFirstName())
+        ValidatorUtil.notNull
+                .and(ValidatorUtil.notEmpty)
+                .and(ValidatorUtil.maxLength(5))
+                .validate(person.getFirstName())
                 .throwIfInvalid("Pleace specify valid firstName!");
 
-        ValidatorUtil.notNullInteger
-                .and(ValidatorUtil.integerMoreThan(18))
-                .test(person.getAge())
-                .throwIfInvalid("Pleace specify valit age. More than 18 years.");
-
         if (person.isAdmin())
-            ValidatorUtil.notNullString
-                    .and(ValidatorUtil.notEmptyString)
-                    .and(ValidatorUtil.equals("Petar"))
-                    .test(person.getFirstName())
+            ValidatorUtil.notNull
+                    .and(ValidatorUtil.notEmpty)
+                    .and(ValidatorUtil.equalCheck("Petar"))
+                    .validate(person.getFirstName())
                     .throwIfInvalid("Admin firstName is not valid.");
     }
 }
