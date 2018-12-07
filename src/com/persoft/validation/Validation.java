@@ -2,7 +2,7 @@ package com.persoft.validation;
 
 @FunctionalInterface
 public interface Validation<K> {
-    public GenericValidationResult validate(K param);
+    GenericValidationResult validate(K param);
 
     default Validation<K> and(Validation<K> other) {
         return param -> {

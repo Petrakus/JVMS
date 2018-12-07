@@ -22,10 +22,6 @@ public class GenericValidationResult {
         return new GenericValidationResult(false);
     }
 
-    public Optional<String> getFieldNameIfInvalid(String field) {
-        return this.valid ? Optional.empty() : Optional.of(field);
-    }
-
     public void throwIfInvalid(String message) throws ValidationException{
         if (!this.valid) throw new ValidationException(message);
     }
