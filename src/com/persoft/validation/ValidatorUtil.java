@@ -15,7 +15,14 @@ public class ValidatorUtil {
      * Note: Only valid for string properties
      */
     public Validation<Object> notEmpty() {
-        return GenericValidation.from(s -> !((String) s).isEmpty());
+        return GenericValidation.from(s -> !((String) s).trim().isEmpty());
+    }
+
+    /**
+     * Note: Only valid for string properties
+     */
+    public Validation<Object> notBlank() {
+        return notNull().and(notEmpty());
     }
 
     public Validation<Object> isEqual(Object value) {

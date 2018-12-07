@@ -1,5 +1,6 @@
 package com.persoft.validation;
 
+import javax.xml.bind.ValidationException;
 import java.util.Optional;
 
 public class GenericValidationResult {
@@ -25,7 +26,7 @@ public class GenericValidationResult {
         return this.valid ? Optional.empty() : Optional.of(field);
     }
 
-    public void throwIfInvalid(String field) {
-        if (!this.valid) throw new IllegalArgumentException(field);
+    public void throwIfInvalid(String field) throws ValidationException{
+        if (!this.valid) throw new ValidationException(field);
     }
 }
