@@ -5,7 +5,7 @@ import com.persoft.validation.ValidatorUtil;
 import javax.xml.bind.ValidationException;
 
 
-public class PersonValidator extends ValidatorUtil {
+public class PersonValidator implements ValidatorUtil {
 
     public void validate(Person person) throws ValidationException {
 
