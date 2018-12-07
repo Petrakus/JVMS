@@ -3,6 +3,8 @@ package com.persoft;
 import com.persoft.validation.ValidatorUtil;
 
 import javax.xml.bind.ValidationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -10,18 +12,21 @@ public class PersonValidator implements ValidatorUtil {
 
     public void validate(Person person) throws ValidationException {
 
-        isEmail().validate(person.getEmail()).throwIfInvalid("Not valid email");
+        List<Optional<String>> errors = new ArrayList<>();
 
-        notBlank()
+        errors.add(isEmail().validate(person.getEmail()).withMessage("Not valid email"));
+
+        errors.add(notBlank()
                 .and(length(2,5))
                 .validate(person.getFirstName())
-                .throwIfInvalid("Please specify valid firstName!");
+                .withMessage("Please specify valid firstName!"));
 
-        notNull().and(lessThanOrEqual(28)).validate(person.getAge()).throwIfInvalid("Age is not valid");
+        errors.add(notNull().and(lessThanOrEqual(28)).validate(person.getAge()).withMessage("Age is not valid"));
 
 
-        Optional<String> err = must(age -> (Integer)age < 20).validate(person.getAge()).withMessage("Age is not valid by the predicate definition");
-        err.ifPresent(System.out::println);
+        errors.add(must(age -> (Integer)age < 20).validate(person.getAge()).withMessage("Age is not valid by the predicate definition"));
+
+        errors.forEach(e-> e.ifPresent(System.out::println));
 
         if (person.isAdmin())
             notBlank()
