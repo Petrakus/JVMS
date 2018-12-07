@@ -26,7 +26,11 @@ public class GenericValidationResult {
         return this.valid ? Optional.empty() : Optional.of(field);
     }
 
-    public void throwIfInvalid(String field) throws ValidationException{
-        if (!this.valid) throw new ValidationException(field);
+    public void throwIfInvalid(String message) throws ValidationException{
+        if (!this.valid) throw new ValidationException(message);
+    }
+
+    public Optional<String> withMessage(String message){
+        return this.valid ? Optional.empty() : Optional.of(message);
     }
 }

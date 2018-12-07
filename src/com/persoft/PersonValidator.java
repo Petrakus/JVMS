@@ -3,6 +3,7 @@ package com.persoft;
 import com.persoft.validation.ValidatorUtil;
 
 import javax.xml.bind.ValidationException;
+import java.util.Optional;
 
 
 public class PersonValidator implements ValidatorUtil {
@@ -19,7 +20,8 @@ public class PersonValidator implements ValidatorUtil {
         notNull().and(lessThanOrEqual(28)).validate(person.getAge()).throwIfInvalid("Age is not valid");
 
 
-        must(age -> (Integer)age < 20).validate(person.getAge()).throwIfInvalid("Age is not valid by the predicate definition");
+        Optional<String> err = must(age -> (Integer)age < 20).validate(person.getAge()).withMessage("Age is not valid by the predicate definition");
+        err.ifPresent(System.out::println);
 
         if (person.isAdmin())
             notBlank()
