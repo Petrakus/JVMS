@@ -13,17 +13,18 @@ public class PersonValidatorWithErrorsList implements DefaultValidator {
 
         List<Optional<String>> errors = new ArrayList<>();
 
-        errors.add(isEmail().validate(person.getEmail()).withMessage("Not valid email"));
+        errors.add(isEmail().forParam(person.getEmail()).withMessage("Not a valid email"));
 
-        errors.add(notBlank()
-                .and(length(2, 5))
-                .validate(person.getFirstName())
+        errors.add(notNull()
+                .and(notEmpty())
+                .and(notEqual("foo"))
+                .forParam(person.getFirstName())
                 .withMessage("Please specify valid firstName!"));
 
-        errors.add(notNull().and(lessThanOrEqual(28)).validate(person.getAge()).withMessage("Age is not valid"));
+        errors.add(notNull().and(lessThanOrEqual(28)).forParam(person.getAge()).withMessage("Age is not valid"));
 
 
-        errors.add(must(age -> (Integer) age < 20).validate(person.getAge()).withMessage("Age is not valid by the predicate definition"));
+        errors.add(must(age -> (Integer) age < 20).forParam(person.getAge()).withMessage("Age is not valid by the predicate definition"));
 
         return errors;
     }

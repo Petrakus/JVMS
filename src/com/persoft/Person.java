@@ -7,15 +7,13 @@ public class Person {
     private String email;
     private int age;
     private char gender;
-    private boolean isAdmin;
 
-    public Person(String firstName, String lastName, String email, int age, char gender, boolean isAdmin) {
+    public Person(String firstName, String lastName, String email, int age, char gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
         this.gender = gender;
-        this.isAdmin = isAdmin;
     }
 
     public String getFirstName() {
@@ -56,13 +54,5 @@ public class Person {
 
     public void setGender(char gender) {
         this.gender = gender;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
     }
 }

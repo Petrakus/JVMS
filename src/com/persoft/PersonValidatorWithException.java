@@ -8,17 +8,18 @@ public class PersonValidatorWithException implements DefaultValidator {
 
     public void validate(Person person) throws ValidationException {
 
-        isEmail().validate(person.getEmail()).throwIfInvalid("Not valid email");
+        isEmail().forParam(person.getEmail()).throwIfInvalid("Not a valid email");
 
-        notBlank()
-                .and(length(2, 5))
-                .validate(person.getFirstName())
+        notNull()
+                .and(notEmpty())
+                .and(notEqual("foo"))
+                .forParam(person.getFirstName())
                 .throwIfInvalid("Please specify valid firstName!");
 
-        notNull().and(lessThanOrEqual(28)).validate(person.getAge()).throwIfInvalid("Age is not valid");
+        notNull().and(lessThanOrEqual(28)).forParam(person.getAge()).throwIfInvalid("Age is not valid");
 
 
-        must(age -> (Integer) age < 20).validate(person.getAge()).throwIfInvalid("Age is not valid by the predicate definition");
+        must(age -> (Integer) age < 20).forParam(person.getAge()).throwIfInvalid("Age is not valid by the predicate definition");
 
     }
 }

@@ -7,7 +7,7 @@ import java.util.Optional;
 public class Main {
 
     public static void main(String[] args) {
-        Person person = new Person("Test", "Test", "test@gmail.com", 28, 'm', true);
+        Person person = new Person("Test", "Test", "test@gmail.com", 28, 'm');
 
         // Example validator which returns errors list
         PersonValidatorWithErrorsList personValidator = new PersonValidatorWithErrorsList();

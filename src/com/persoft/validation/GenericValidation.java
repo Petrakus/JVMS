@@ -14,7 +14,7 @@ public class GenericValidation<K> implements Validation<K> {
     }
 
     @Override
-    public GenericValidationResult validate(K param) {
+    public GenericValidationResult forParam(K param) {
         return predicate.test(param) ? GenericValidationResult.ok() : GenericValidationResult.fail();
     }
 }
