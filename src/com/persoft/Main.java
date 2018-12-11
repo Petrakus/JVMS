@@ -1,25 +1,54 @@
 package com.persoft;
 
+import com.persoft.validation.ValidationResult;
+
 import javax.xml.bind.ValidationException;
-import java.util.List;
-import java.util.Optional;
+
+import static com.persoft.validation.JVMS.notBlank;
 
 public class Main {
 
     public static void main(String[] args) {
-        Person person = new Person("Test", "Test", "test@gmail.com", 28, 'm');
+        String firstName = null;
 
-        // Example validator which returns errors list
-        PersonValidatorWithErrorsList personValidator = new PersonValidatorWithErrorsList();
-        List<Optional<String>> errors = personValidator.validate(person);
-        errors.forEach(e-> e.ifPresent(System.out::println));
-
-        // Example validator which throws ValidationException if validation fails
-        PersonValidatorWithException personValidatorWithException = new PersonValidatorWithException();
-        try {
-            personValidatorWithException.validate(person);
-        } catch (ValidationException e) {
-            System.out.println(e.getMessage());
+        // Simple validation
+        ValidationResult validationResult = notBlank().validate(firstName);
+        if(!validationResult.isValid()) {
+            System.out.println(validationResult.getMessage());
         }
+
+        // Validation by using the withMessage() method with param name.
+        ValidationResult validationResult1 = notBlank().validate(firstName).withMessage("firstName");
+        if(!validationResult.isValid()) {
+            System.out.println(validationResult1.getMessage());
+        }
+
+        // Validation by using the withCustomMessage() method.
+        ValidationResult validationResult2 = notBlank().validate(firstName).withCustomMessage("Firstname is required!");
+        if(!validationResult.isValid()) {
+            System.out.println(validationResult2.getMessage());
+        }
+
+        // Throwing and error
+        try {
+            notBlank().validate(firstName).throwIfInvalid();
+        } catch (ValidationException e) {
+            e.printStackTrace();
+        }
+
+        // Throwing and error with param name.
+        try {
+            notBlank().validate(firstName).throwIfInvalid("firstName");
+        } catch (ValidationException e) {
+            e.printStackTrace();
+        }
+
+        // Throwing and error with custom message
+        try {
+            notBlank().validate(firstName).throwIfInvalidCustomMessage("Firstname is required!");
+        } catch (ValidationException e) {
+            e.printStackTrace();
+        }
+
     }
 }

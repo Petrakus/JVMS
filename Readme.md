@@ -2,75 +2,52 @@
 ## Requirements
 In order to use JVMS(Java Validation Made Simple), your project must use Java 8 +.
 
+
 ## Creating your first validator
-
-For example, imagine that you have a Person class:
-```java
-public class Person {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private int age;
-    private char gender;
-}
-```
-
-You would define a set of validation rules for this class by creating a PersonValidator class.
-In order to use the built in validations your class must implement the DefaultValidator interface:
-
+In order to use the JVMS validation you just need to import it:
 ````java
-public class PersonValidator implements DefaultValidator {
-
-    public boolean validate(Person person) {
-        GenericValidationResult validationResult = isEmail().forParam(person.getEmail());
-        return validationResult.isValid();
-    }
+import static com.persoft.validation.JVMS.*;
+````
+Then imagine that you need to validate a field to not be null or empty:
+````java
+ValidationResult validationResult = notBlank().validate(firstName);
+if(!validationResult.isValid()) {
+    System.out.println(validationResult.getMessage());
 }
 ````
+In this example we use the built in validation ``notBlank`` , then we tell JVMS which field we want to validate with the ``validate`` method.
 
-The ``forParam`` method returns a GenericValidationResult object that contains:
+The ``forParam`` method returns a ValidationResult object that contains:
 * ``isValid()`` - a boolean that says whether the validation succeeded.
-Example:
-````java
-GenericValidationResult validationResult = isEmail().forParam(person.getEmail());
-````
+* ``getMessage()`` - a String which contains the error message.
+
 ## Chaining validators
 You can chain multiple validators together for the same property:
 ````java
-GenericValidationResult validationResult = notNull()
+ValidationResult validationResult = notNull()
         .and(notEmpty())
         .and(notEqual("foo"))
-        .forParam(person.getFirstName());
-````
-This would ensure that the firstName is not null, not empty and is not equal to the string ‘foo’.
-
-Instead of using notNull() and notEmpty() methods, you can use notBlank() which combines them:
-````java
-GenericValidationResult validationResult = notBlank()
-        .and(notEqual("foo"))
-        .forParam(person.getFirstName());
+        .forParam(firstName);
 ````
 
 ## Throwing Exceptions
 
-Instead of returning a ``GenericValidationResult``, you can alternatively tell JVMS to throw an exception if validation fails by using the ``throwIfInvalid`` method:
+Instead of returning a ``ValidationResult``, you can tell JVMS to throw an exception if validation fails by using the ``throwIfInvalid`` method:
 ````java
-public class PersonValidatorWithException implements DefaultValidator {
+notBlank().validate(firstName).throwIfInvalid();
+````
+You just need to catch ``ValidationException``
 
-    public void validate(Person person) throws ValidationException {
-        isEmail().forParam(person.getEmail()).throwIfInvalid("Not a valid email");
-    }
-}
+``throwIfInvalid()`` method will throw an exception with default error message. You can customize that error message by passing the parameter name or by using a custom one:
+````java
+notBlank().validate(firstName).throwIfInvalid("firstName");
+notBlank().validate(firstName).throwIfInvalidCustomMessage("Firstname is required!");
 ````
 
-## Returning error message
+## Customizing the error message
 
-Instead of returning a ``GenericValidationResult``, you can alternatively tell JVMS to return an error message if validation fails by using the ``withMessage`` method, which returns ``Optinal<String>``:
+``getMessage`` will return a default error message if validation fails. You can customize that error message by passing the parameter name or by using a custom one:
 ````java
-public class PersonValidatorWithException implements DefaultValidator {
-
-    public void validate(Person person) throws ValidationException {
-        Optonal<String> error = isEmail().forParam(person.getEmail()).withMessage("Not a valid email");
-    }
-}
+notBlank().validate(firstName).withMessage("firstName");
+notBlank().validate(firstName).withCustomMessage("Firstname is required!");
 ````
