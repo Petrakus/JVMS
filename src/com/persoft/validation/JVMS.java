@@ -28,32 +28,32 @@ public class JVMS {
     }
 
     public static Validation<Object> isEqual(Object value) {
-        return GenericValidation.from(v -> v.equals(value), format("must be equal to %s", value));
+        return GenericValidation.from(v -> v.equals(value), format("must be equal to %s.", value));
     }
 
     public static Validation<Object> notEqual(Object value) {
-        return GenericValidation.from(v -> !v.equals(value), format("must not be equal to %s", value));
+        return GenericValidation.from(v -> !v.equals(value), format("must not be equal to %s.", value));
     }
 
     /**
      * Note: Only valid for string properties
      */
     public static Validation<Object> maxLength(int limit) {
-        return GenericValidation.from(s -> ((String) s).length() <= limit, format("must have less than %s or equal %s chars.", limit, limit));
+        return GenericValidation.from(s -> ((String) s).length() <= limit, format("must be %s characters or fewer.", limit));
     }
 
     /**
      * Note: Only valid for string properties
      */
     public static Validation<Object> minLength(int size) {
-        return GenericValidation.from(s -> ((String) s).length() >= size, format("must have more than %s or equal %s chars.", size, size));
+        return GenericValidation.from(s -> ((String) s).length() >= size, format("must be at least %s characters.", size));
     }
 
     /**
      * Note: Only valid for string properties
      */
     public static Validation<Object> length(int moreThan, int lessThan) {
-        return minLength(moreThan).and(maxLength(lessThan));
+        return GenericValidation.from(s -> ((String) s).length() >= moreThan && ((String) s).length() <= lessThan, format("must be between %s and %s characters.", moreThan, lessThan));
     }
 
     /**
@@ -70,7 +70,7 @@ public class JVMS {
             } else {
                 return (Integer) i < lessThan.intValue();
             }
-        }, format("must be less than %s", lessThan));
+        }, format("must be less than %s.", lessThan));
     }
 
     /**
@@ -87,7 +87,7 @@ public class JVMS {
             } else {
                 return (Integer) i <= lessThan.intValue();
             }
-        }, format("must be less than %s or equal to %s", lessThan, lessThan));
+        }, format("must be less than or equal to %s.", lessThan));
     }
 
     /**
@@ -104,7 +104,7 @@ public class JVMS {
             } else {
                 return (Integer) i > lessThan.intValue();
             }
-        }, format("must be greater than %s", lessThan));
+        }, format("must be greater than %s.", lessThan));
     }
 
     /**
@@ -121,14 +121,14 @@ public class JVMS {
             } else {
                 return (Integer) i >= lessThan.intValue();
             }
-        }, format("must be greater than %s or equal to %s", lessThan, lessThan));
+        }, format("must be greater than or equal to %s.", lessThan));
     }
 
     /**
      * Custom predicate validation
      */
     public static <K> Validation<K> must(Predicate<K> predicate) {
-        return GenericValidation.from(predicate, "not matching the predicate defined");
+        return GenericValidation.from(predicate, "not matching the predicate defined.");
     }
 
     /**
@@ -136,7 +136,7 @@ public class JVMS {
      */
     public static Validation<Object> matches(String regex) {
         Pattern pattern = Pattern.compile(regex);
-        return GenericValidation.from(s -> pattern.matcher((String)s).matches(), format("must match the pattern %s", regex));
+        return GenericValidation.from(s -> pattern.matcher((String)s).matches(), "is not in the correct format.");
     }
 
     /**
@@ -144,6 +144,7 @@ public class JVMS {
      */
     public static Validation<Object> isEmail() {
         String emailRegex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
-        return matches(emailRegex);
+        Pattern pattern = Pattern.compile(emailRegex);
+        return GenericValidation.from(s -> pattern.matcher((String)s).matches(), "is not a valid email address.");
     }
 }

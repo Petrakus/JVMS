@@ -51,3 +51,142 @@ notBlank().validate(firstName).throwIfInvalidCustomMessage("Firstname is require
 notBlank().validate(firstName).withMessage("firstName");
 notBlank().validate(firstName).withCustomMessage("Firstname is required!");
 ````
+
+
+# Built-in Validators
+JVSM ships with several built-in validators.
+
+### notNull Validator
+Description: Ensures that the specified property is not null.
+
+Example:
+````java
+notNull().validate(firstName);
+````
+Example error: must not be null.
+
+### notEmpty Validator
+Description: Ensures that the specified property is not an empty string or whitespace.
+
+Example:
+````java
+notEmpty().validate(firstName);
+````
+Example error: should not be empty.
+
+### notBlank Validator
+Description: Ensures that the specified property is not null or empty.
+
+Example:
+````java
+notBlank().validate(firstName);
+````
+Example error: must not be null / should not be empty.
+
+### isEqual Validator
+Description: Ensures that the value of the specified property is equal to a particular value.
+
+Example:
+````java
+isEqual("Foo").validate(firstName);
+````
+Example error: should be equal to 'Foo'.
+
+### notEqual Validator
+Description: Ensures that the value of the specified property is not equal to a particular value.
+
+Example:
+````java
+notEqual("Foo").validate(firstName);
+````
+Example error: should not be equal to 'Foo' .
+
+### length Validator
+Description: Ensures that the length of a particular string property is within the specified range. However, it doesn’t ensure that the string property isn’t null.
+
+Example:
+````java
+length(1, 250).validate(firstName);
+````
+Example error: must be between 1 and 250 characters.
+Note: Only valid on string properties. 
+
+### maxLength Validator
+Description: Ensures that the length of a particular string property is no longer than the specified value.
+
+Example:
+````java
+maxLength(10).validate(firstName);
+````
+Example error: must be 10 characters or fewer.
+Note: Only valid on string properties. 
+
+### minLength Validator
+Description: Ensures that the length of a particular string property is longer than the specified value.
+
+Example:
+````java
+minLength(10).validate(firstName);
+````
+Example error: must be at least 10 characters.
+Note: Only valid on string properties. 
+
+### lessThan Validator
+Description: Ensures that the value of the specified property is less than a particular value.
+
+Example:
+````java
+lessThan(10).validate(age);
+````
+Example error: must be less than 10.
+Note: Only valid on number properties. 
+
+### lessThanOrEqual Validator
+Description: Ensures that the value of the specified property is less than or equal to a particular value.
+
+Example:
+````java
+lessThanOrEqual(10).validate(age);
+````
+Example error: must be less than or equal to 10.
+Note: Only valid on number properties. 
+
+### greaterThan Validator
+Description: Ensures that the value of the specified property is greater than a particular value.
+
+Example:
+````java
+greaterThan(10).validate(age);
+````
+Example error: must be greater than 10.
+Note: Only valid on number properties. 
+
+### greaterThanOrEqual Validator
+Description: Ensures that the value of the specified property is greater than or equal to a particular value.
+
+Example:
+````java
+greaterThanOrEqual(10).validate(age);
+````
+Example error: must be greater than or equal to 10.
+Note: Only valid on number properties. 
+
+### matches Validator
+Description: Ensures that the value of the specified property matches the given regular expression. 
+
+Example:
+````java
+matches("some regex").validate(age);
+````
+Example error: is not in the correct format.
+Note: Only valid on string properties. 
+
+### isEmail Validator
+Description: Ensures that the value of the specified property is a valid email address format. 
+
+Example:
+````java
+isEmail().validate(email);
+````
+Example error: is not a valid email address.
+Note: Only valid on string properties. 

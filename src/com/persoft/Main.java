@@ -4,15 +4,16 @@ import com.persoft.validation.ValidationResult;
 
 import javax.xml.bind.ValidationException;
 
+import static com.persoft.validation.JVMS.isEqual;
 import static com.persoft.validation.JVMS.notBlank;
 
 public class Main {
 
     public static void main(String[] args) {
-        String firstName = null;
+        String firstName = "John";
 
         // Simple validation
-        ValidationResult validationResult = notBlank().validate(firstName);
+        ValidationResult validationResult = notBlank().and(isEqual("foo")).validate(firstName);
         if(!validationResult.isValid()) {
             System.out.println(validationResult.getMessage());
         }
