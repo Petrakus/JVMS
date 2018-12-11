@@ -176,7 +176,7 @@ Description: Ensures that the value of the specified property matches the given 
 
 Example:
 ````java
-matches("some regex").validate(age);
+matches("some regex").validate(email);
 ````
 Example error: is not in the correct format.
 Note: Only valid on string properties. 
