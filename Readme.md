@@ -17,7 +17,7 @@ if(!validationResult.isValid()) {
 ````
 In this example we use the built in validation ``notBlank`` , then we tell JVMS which field we want to validate with the ``validate`` method.
 
-The ``forParam`` method returns a ValidationResult object that contains:
+The ``validate`` method returns a ValidationResult object that contains:
 * ``isValid()`` - a boolean that says whether the validation succeeded.
 * ``getMessage()`` - a String which contains the error message.
 
@@ -27,7 +27,7 @@ You can chain multiple validators together for the same property:
 ValidationResult validationResult = notNull()
         .and(notEmpty())
         .and(notEqual("foo"))
-        .forParam(firstName);
+        .validate(firstName);
 ````
 
 ## Throwing Exceptions
