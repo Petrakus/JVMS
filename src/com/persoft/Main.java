@@ -19,15 +19,15 @@ public class Main {
         }
 
         // Validation by using the withMessage() method with param name.
-        ValidationResult validationResult1 = notBlank().validate(firstName).withMessage("firstName");
-        if(!validationResult.isValid()) {
-            System.out.println(validationResult1.getMessage());
+        String errMsg = notBlank().validate(firstName).withMessage("firstName").getMessage();
+        if(errMsg != null) {
+            System.out.println(errMsg);
         }
 
         // Validation by using the withCustomMessage() method.
-        ValidationResult validationResult2 = notBlank().validate(firstName).withCustomMessage("Firstname is required!");
-        if(!validationResult.isValid()) {
-            System.out.println(validationResult2.getMessage());
+        String errMsg2 = notBlank().validate(firstName).withCustomMessage("Firstname is required!").getMessage();
+        if(errMsg != null) {
+            System.out.println(errMsg2);
         }
 
         // Throwing and error
