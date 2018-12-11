@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-public interface ValidatorUtil {
+public interface DefaultValidator {
 
     default Validation<Object> notNull() {
         return GenericValidation.from(Objects::nonNull);

@@ -1,13 +1,13 @@
 package com.persoft;
 
-import com.persoft.validation.ValidatorUtil;
+import com.persoft.validation.DefaultValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-public class PersonValidatorWithErrorsList implements ValidatorUtil {
+public class PersonValidatorWithErrorsList implements DefaultValidator {
 
     public List<Optional<String>> validate(Person person) {
 

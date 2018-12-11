@@ -1,10 +1,10 @@
 package com.persoft;
 
-import com.persoft.validation.ValidatorUtil;
+import com.persoft.validation.DefaultValidator;
 
 import javax.xml.bind.ValidationException;
 
-public class PersonValidatorWithException implements ValidatorUtil {
+public class PersonValidatorWithException implements DefaultValidator {
 
     public void validate(Person person) throws ValidationException {
 
