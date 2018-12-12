@@ -190,3 +190,12 @@ isEmail().validate(email);
 ````
 Example error: is not a valid email address.
 Note: Only valid on string properties. 
+
+### must Validator
+Description: Accepting a user defined predicate. 
+
+Example:
+````java
+must(s -> s.equals("test")).validate(firstName);
+````
+Example error: not matching the predicate defined.
