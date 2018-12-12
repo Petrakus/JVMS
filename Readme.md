@@ -199,3 +199,12 @@ Example:
 must(s -> s.equals("test")).validate(firstName);
 ````
 Example error: not matching the predicate defined.
+
+### isCreditCardNumber Validator
+Description: Validating a credit card number - visa, mastercard, discover, american express, diners, jcb. 
+
+Example:
+````java
+isCreditCardNumber("4012888888881881").validate(cardNumber);
+````
+Example error: is not a valid credit card number.
