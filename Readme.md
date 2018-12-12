@@ -205,6 +205,6 @@ Description: Validating a credit card number - visa, mastercard, discover, ameri
 
 Example:
 ````java
-isCreditCardNumber("4012888888881881").validate(cardNumber);
+isCreditCardNumber().validate(cardNumber);
 ````
 Example error: is not a valid credit card number.
