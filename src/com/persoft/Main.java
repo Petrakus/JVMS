@@ -30,21 +30,21 @@ public class Main {
             System.out.println(errMsg2);
         }
 
-        // Throwing and error
+        // Throwing an error
         try {
             notBlank().validate(firstName).throwIfInvalid();
         } catch (ValidationException e) {
             e.printStackTrace();
         }
 
-        // Throwing and error with param name.
+        // Throwing an error with param name.
         try {
             notBlank().validate(firstName).throwIfInvalid("firstName");
         } catch (ValidationException e) {
             e.printStackTrace();
         }
 
-        // Throwing and error with custom message
+        // Throwing an error with custom message
         try {
             notBlank().validate(firstName).throwIfInvalidCustomMessage("Firstname is required!");
         } catch (ValidationException e) {
