@@ -40,7 +40,13 @@ You just need to catch ``ValidationException``
 
 ``throwIfInvalid()`` method will throw an exception with default error message. You can customize that error message by passing the parameter name or by using a custom one:
 ````java
+// Example error: Must not be null.
+notBlank().validate(firstName).throwIfInvalid();
+
+// Example error: firstName : Must not be null.
 notBlank().validate(firstName).throwIfInvalid("firstName");
+
+// Example error: Firstname is required!
 notBlank().validate(firstName).throwIfInvalidCustomMessage("Firstname is required!");
 ````
 
@@ -48,7 +54,10 @@ notBlank().validate(firstName).throwIfInvalidCustomMessage("Firstname is require
 
 ``getMessage`` will return a default error message if validation fails. You can customize that error message by passing the parameter name or by using a custom one:
 ````java
+// Example error: firstName : Must not be null.
 notBlank().validate(firstName).withMessage("firstName");
+
+// Example error: Firstname is required!
 notBlank().validate(firstName).withCustomMessage("Firstname is required!");
 ````
 
