@@ -217,3 +217,9 @@ Example:
 isCreditCardNumber().validate(cardNumber);
 ````
 Example error: is not a valid credit card number.
+
+## Authors
+
+* **Petar Petrov** - *Initial work* - [Petrakus](https://github.com/Petrakus)
+
+See also the list of [contributors](https://github.com/Petrakus/JVMS/graphs/contributors) who participated in this project.
