@@ -1,6 +1,6 @@
 # Java Validation Made Simple
 ## Requirements
-In order to use JVMS(Java Validation Made Simple), your project must use Java 8+.
+In order to use JVMS(Java Validation Made Simple), your project must be Java 8+.
 
 
 ## Creating your first validator
