@@ -92,7 +92,7 @@ GenericValidation<Employee> zipCodeNotEmptyRule = GenericValidation.from(
 Employee employee = new Employee();
 firstNameRule.and(zipCodeNotEmptyRule).validate(employee).throwIfInvalid();
 ````
-
+The example above will throw ValidationException with exception message - 'FirstName is required!'
 
 # Built-in Validators
 JVSM ships with several built-in validators.
