@@ -66,7 +66,7 @@ notBlank().validate(firstName).withCustomMessage("Firstname is required!");
 
 ## Creating custom validation
 
-Here is an example of a Employee custom validation:
+Here is an example of an Employee class custom validation:
 
 Employee class:
 ````java
