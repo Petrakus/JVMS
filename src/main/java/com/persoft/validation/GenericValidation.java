@@ -6,7 +6,7 @@ public class GenericValidation<K> implements Validation<K> {
     private Predicate<K> predicate;
     private String onErrorMessage;
 
-    static <K> GenericValidation<K> from(Predicate<K> predicate, String onErrorMessage) {
+    public static <K> GenericValidation<K> from(Predicate<K> predicate, String onErrorMessage) {
         return new GenericValidation<>(predicate, onErrorMessage);
     }
 
