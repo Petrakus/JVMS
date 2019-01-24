@@ -1,4 +1,7 @@
 # Java Validation Made Simple
+
+Java framework for building strongly-typed validation.
+
 ## Requirements
 In order to use JVMS(Java Validation Made Simple), your project must be Java 8+.
 
