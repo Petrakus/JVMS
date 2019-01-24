@@ -64,6 +64,35 @@ notBlank().validate(firstName).withMessage("firstName");
 notBlank().validate(firstName).withCustomMessage("Firstname is required!");
 ````
 
+## Creating custom validation
+
+Here is an example of a Employee custom validation:
+
+Employee class:
+````java
+public class Employee {
+    private String firstName;
+    private String zipCode;   
+    //Assume getters & setters below.
+}
+````
+Custom validation rules:
+
+````java
+GenericValidation<Employee> firstNameRule = GenericValidation.from(
+        e -> (e.getFirstName() != null && !e.getFirstName().isEmpty()),
+        "FirstName is required!"
+);
+
+GenericValidation<Employee> zipCodeNotEmptyRule = GenericValidation.from(
+    e -> (e.getZipCode() != null && !e.getZipCode().isEmpty()),
+    "Zip code is required"
+);
+
+Employee employee = new Employee();
+firstNameRule.and(zipCodeNotEmptyRule).validate(employee).throwIfInvalid();
+````
+
 
 # Built-in Validators
 JVSM ships with several built-in validators.
